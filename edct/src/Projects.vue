@@ -11,7 +11,8 @@
 export default {
         data () {
             return {
-            projects : ['a', 'b', 'c'] }
+                projects : [] 
+            }
         }
     }
 </script>

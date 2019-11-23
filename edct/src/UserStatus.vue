@@ -18,7 +18,7 @@
             Password:<br>
             <input v-model="password" placeholder="password">
             <br>
-            <button @click="attemptLogIn">Log in!</button>
+            <button @click="simplestUserAuth">Log in!</button>
         </div>
 
     </div>
@@ -40,9 +40,6 @@
         methods: {
             attemptLogIn () {
                 this.loggingIn = !this.loggingIn;
-                this.simplestUserAuth('test', 'test');
-                this.loggedIn = !this.loggedIn;
-                this.$emit('logInChecked', this.loggedIn);
             },
             createNewUser () {
                 if (!this.loggedIn && this.possibleNewUser)
