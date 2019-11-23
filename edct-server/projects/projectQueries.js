@@ -8,7 +8,17 @@ const pool = new Pool({
 })
 
 const getProjects = (request, response) => {
-  pool.query('SELECT * FROM project_members ORDER BY user_id ASC', (error, results) => {
+  pool.query('SELECT * FROM project_members',(error, results) => {
+    if (error) {
+      throw error
+    }
+    response.status(200).json(results.rows)
+  })
+}
+
+const getProjectsByID = (request, response) => {
+  const id = parseInt(request.params.id)
+  pool.query('SELECT project_id FROM project_members WHERE user_id = $1',[id],(error, results) => {
     if (error) {
       throw error
     }
@@ -77,6 +87,7 @@ const deleteProject = (request, response) => {
 
 module.exports = {
   getProjects,
+  getProjectsByID,
   createProject,
   updateProject,
   deleteProject,

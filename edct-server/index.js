@@ -32,6 +32,7 @@ app.delete('/users/:id', userTable.deleteUser)
 
 // CRUD on projects
 app.get('/projects', projectTable.getProjects)
+app.get('/projects/:id', projectTable.getProjectsByID)
 app.post('/projects', projectTable.createProject)
 app.put('/projects/:id', projectTable.updateProject)
 app.delete('/projects/:id', projectTable.deleteProject)
