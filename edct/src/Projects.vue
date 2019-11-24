@@ -5,13 +5,34 @@
             {{project}}
             here
         </div>
+        {{getProjects()}}
     </div> 
 </template>
 <script>
 export default {
         data () {
             return {
-                projects : [] 
+                projects : [],
+                // this is just for dev/testing purposed
+                // when user authentication is added this should be populated
+                // at this point
+                userId: 4
+            }
+        },
+        methods: {
+            getProjects() {
+                var project_id = [];
+                this.$http.get('http://localhost:3000/projectMembers/' + this.userId)
+                            .then(response => {
+                                response.data.forEach(this.getFullProjects);
+                            }, error => { console.log(error); });
+
+            },
+            getFullProjects(item) {
+                this.$http.get('http://localhost:3000/projects/' + item.project_id)
+                            .then(response => {
+                                this.projects.push(response.data);
+                            }, error => { console.log(error); });
             }
         }
     }
