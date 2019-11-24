@@ -18,7 +18,7 @@ const getProjects = (request, response) => {
 
 const getProjectsByID = (request, response) => {
   const id = parseInt(request.params.id)
-  pool.query('SELECT project_id FROM project_members WHERE user_id = $1',[id],(error, results) => {
+  pool.query('SELECT * FROM projects WHERE id = $1',[id],(error, results) => {
     if (error) {
       throw error
     }

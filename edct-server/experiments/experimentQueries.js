@@ -34,8 +34,8 @@ const createExperiment = (request, response) => {
   // properties and dataset should be paths to their .csv files
   // using csvtojson from npm, https://www.npmjs.com/package/csvtojson
   const csv = require('csvtojson')
-  const properties=await csv().fromFile(propertiespath);
-  const dataset = await csv().fromFile(datasetpath);
+  const properties= csv().fromFile(propertiespath);
+  const dataset = csv().fromFile(datasetpath);
   pool.query('INSERT INTO experiments (owner, project, properties, dataset) VALUES ($1, $2, $3, $4)', [owner, project, properties, dataset], (error, results) => {
     if (error) {
       throw error

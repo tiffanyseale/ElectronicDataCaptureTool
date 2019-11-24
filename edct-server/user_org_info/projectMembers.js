@@ -7,6 +7,16 @@ const pool = new Pool({
   port: 5432,
 })
 
+const getProjectsByUserID = (request, response) => {
+  const id = parseInt(request.params.id)
+  pool.query('SELECT project_id FROM project_members WHERE user_id = $1',[id],(error, results) => {
+    if (error) {
+      throw error
+    }
+    response.status(200).json(results.rows)
+  })
+}
+
 const addUserToProject = (request, response) => {
   const { user_id, project_id } = request.body
 
@@ -19,5 +29,6 @@ const addUserToProject = (request, response) => {
 }
 
 module.exports = {
+  getProjectsByUserID,
   addUserToProject
 }

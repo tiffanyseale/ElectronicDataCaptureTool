@@ -38,6 +38,7 @@ app.put('/projects/:id', projectTable.updateProject)
 app.delete('/projects/:id', projectTable.deleteProject)
 
 // Add additional users to the project_members table
+app.get('/projectMembers/:id', projectMembers.getProjectsByUserID)
 app.post('/projectMembers/', projectMembers.addUserToProject)
 
 // CRUD on experiments
