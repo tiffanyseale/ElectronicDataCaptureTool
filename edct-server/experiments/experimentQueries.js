@@ -30,14 +30,24 @@ const getExperimentsByProject = (request, response) => {
 }
 
 const createExperiment = (request, response) => {
-  const { owner, project, properties, dataset } = request.body
-
+  const { owner, project, propertiespath, datasetpath } = request.body
+  // properties and dataset should be paths to their .csv files
+  // using csvtojson from npm, https://www.npmjs.com/package/csvtojson
+  const csv = require('csvtojson')
+  const properties=await csv().fromFile(propertiespath);
+  const dataset = await csv().fromFile(datasetpath);
   pool.query('INSERT INTO experiments (owner, project, properties, dataset) VALUES ($1, $2, $3, $4)', [owner, project, properties, dataset], (error, results) => {
     if (error) {
       throw error
     }
-    response.status(201).send(`Experiment added with ID: ${results.insertId}`)
+    pool.query('INSERT INTO proj_exp (project_id, experiment_id) VALUES ($1, $2)', [project, results.insertId], (error, results) => {
+      if (error) {
+        throw error
+      }
+      response.status(201).send(`Experiment added with ID: ${results.insertId}`)
+    })
   })
+
 }
 
 module.exports = {
