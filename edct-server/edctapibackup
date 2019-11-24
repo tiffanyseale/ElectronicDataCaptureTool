@@ -58,6 +58,41 @@ ALTER SEQUENCE public.experiments_id_seq OWNED BY public.experiments.id;
 
 
 --
+-- Name: proj_exp; Type: TABLE; Schema: public; Owner: me
+--
+
+CREATE TABLE public.proj_exp (
+    id integer NOT NULL,
+    project_id integer,
+    experiment_id integer
+);
+
+
+ALTER TABLE public.proj_exp OWNER TO me;
+
+--
+-- Name: proj_exp_id_seq; Type: SEQUENCE; Schema: public; Owner: me
+--
+
+CREATE SEQUENCE public.proj_exp_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.proj_exp_id_seq OWNER TO me;
+
+--
+-- Name: proj_exp_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: me
+--
+
+ALTER SEQUENCE public.proj_exp_id_seq OWNED BY public.proj_exp.id;
+
+
+--
 -- Name: project_members; Type: TABLE; Schema: public; Owner: me
 --
 
@@ -149,6 +184,13 @@ ALTER TABLE ONLY public.experiments ALTER COLUMN id SET DEFAULT nextval('public.
 
 
 --
+-- Name: proj_exp id; Type: DEFAULT; Schema: public; Owner: me
+--
+
+ALTER TABLE ONLY public.proj_exp ALTER COLUMN id SET DEFAULT nextval('public.proj_exp_id_seq'::regclass);
+
+
+--
 -- Name: projects id; Type: DEFAULT; Schema: public; Owner: me
 --
 
@@ -167,6 +209,16 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 --
 
 COPY public.experiments (id, project, owner, properties, dataset) FROM stdin;
+1	1	1	{"b": "foo"}	{"b": "foo"}
+\.
+
+
+--
+-- Data for Name: proj_exp; Type: TABLE DATA; Schema: public; Owner: me
+--
+
+COPY public.proj_exp (id, project_id, experiment_id) FROM stdin;
+1	1	1
 \.
 
 
@@ -207,7 +259,14 @@ COPY public.users (id, name, email, password) FROM stdin;
 -- Name: experiments_id_seq; Type: SEQUENCE SET; Schema: public; Owner: me
 --
 
-SELECT pg_catalog.setval('public.experiments_id_seq', 1, false);
+SELECT pg_catalog.setval('public.experiments_id_seq', 1, true);
+
+
+--
+-- Name: proj_exp_id_seq; Type: SEQUENCE SET; Schema: public; Owner: me
+--
+
+SELECT pg_catalog.setval('public.proj_exp_id_seq', 1, true);
 
 
 --
@@ -230,6 +289,14 @@ SELECT pg_catalog.setval('public.users_id_seq', 5, true);
 
 ALTER TABLE ONLY public.experiments
     ADD CONSTRAINT experiments_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: proj_exp proj_exp_pkey; Type: CONSTRAINT; Schema: public; Owner: me
+--
+
+ALTER TABLE ONLY public.proj_exp
+    ADD CONSTRAINT proj_exp_pkey PRIMARY KEY (id);
 
 
 --
@@ -270,6 +337,22 @@ ALTER TABLE ONLY public.experiments
 
 ALTER TABLE ONLY public.experiments
     ADD CONSTRAINT experiments_project_fkey FOREIGN KEY (project) REFERENCES public.projects(id);
+
+
+--
+-- Name: proj_exp proj_exp_experiment_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: me
+--
+
+ALTER TABLE ONLY public.proj_exp
+    ADD CONSTRAINT proj_exp_experiment_id_fkey FOREIGN KEY (experiment_id) REFERENCES public.experiments(id);
+
+
+--
+-- Name: proj_exp proj_exp_project_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: me
+--
+
+ALTER TABLE ONLY public.proj_exp
+    ADD CONSTRAINT proj_exp_project_id_fkey FOREIGN KEY (project_id) REFERENCES public.projects(id);
 
 
 --
