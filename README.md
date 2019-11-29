@@ -10,4 +10,17 @@ There is also the option to append a proxy in front of the url's inside of the h
 - Requirements Installation Instructions (these instructions are included for Mac users):
   - This is assuming you already have homebrew installed. You can find more information on this here:
     - https://brew.sh/
-  -  
+  - This is **ALSO** assuming you have access to the command line, so go ahead and open that.
+  - PostreSQL Installation:
+    - brew install postgresql
+    - brew services start postgresql
+    - To test your postgreSQL connection, try this:
+      - psql postgres
+        - This should show postgres=#
+      - postgres=# \conninfo
+        - This should show your connection information.
+    - Now, create a user with username 'whateveryouwant' and password 'whateverpasswordyouwant', which has a role that includes creating databases.
+      - Remember this, it will be important when setting up the backend server connection.
+      - postgres=# CREATE ROLE whateveryouwant WITH LOGIN PASSWORD 'whateverpasswordyouwant';
+      - postgres=# ALTER ROLE whateveryouwant CREATEDB;
+    
