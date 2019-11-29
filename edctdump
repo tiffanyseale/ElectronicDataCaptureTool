@@ -1,0 +1,410 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 11.5
+-- Dumped by pg_dump version 11.5
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: experiments; Type: TABLE; Schema: public; Owner: me
+--
+
+CREATE TABLE public.experiments (
+    id integer NOT NULL,
+    owner integer,
+    description character varying(256)
+);
+
+
+ALTER TABLE public.experiments OWNER TO me;
+
+--
+-- Name: experiments_id_seq; Type: SEQUENCE; Schema: public; Owner: me
+--
+
+CREATE SEQUENCE public.experiments_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.experiments_id_seq OWNER TO me;
+
+--
+-- Name: experiments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: me
+--
+
+ALTER SEQUENCE public.experiments_id_seq OWNED BY public.experiments.id;
+
+
+--
+-- Name: experiments_samplesets; Type: TABLE; Schema: public; Owner: me
+--
+
+CREATE TABLE public.experiments_samplesets (
+    experiment_id integer,
+    sampleset_id integer
+);
+
+
+ALTER TABLE public.experiments_samplesets OWNER TO me;
+
+--
+-- Name: project_members; Type: TABLE; Schema: public; Owner: me
+--
+
+CREATE TABLE public.project_members (
+    user_id integer,
+    project_id integer
+);
+
+
+ALTER TABLE public.project_members OWNER TO me;
+
+--
+-- Name: projects; Type: TABLE; Schema: public; Owner: me
+--
+
+CREATE TABLE public.projects (
+    id integer NOT NULL,
+    name character varying(45),
+    leader integer,
+    description character varying(256)
+);
+
+
+ALTER TABLE public.projects OWNER TO me;
+
+--
+-- Name: projects_experiments; Type: TABLE; Schema: public; Owner: me
+--
+
+CREATE TABLE public.projects_experiments (
+    project_id integer,
+    experiment_id integer
+);
+
+
+ALTER TABLE public.projects_experiments OWNER TO me;
+
+--
+-- Name: projects_id_seq; Type: SEQUENCE; Schema: public; Owner: me
+--
+
+CREATE SEQUENCE public.projects_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.projects_id_seq OWNER TO me;
+
+--
+-- Name: projects_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: me
+--
+
+ALTER SEQUENCE public.projects_id_seq OWNED BY public.projects.id;
+
+
+--
+-- Name: samplesets; Type: TABLE; Schema: public; Owner: me
+--
+
+CREATE TABLE public.samplesets (
+    id integer NOT NULL,
+    samples jsonb
+);
+
+
+ALTER TABLE public.samplesets OWNER TO me;
+
+--
+-- Name: samplesets_id_seq; Type: SEQUENCE; Schema: public; Owner: me
+--
+
+CREATE SEQUENCE public.samplesets_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.samplesets_id_seq OWNER TO me;
+
+--
+-- Name: samplesets_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: me
+--
+
+ALTER SEQUENCE public.samplesets_id_seq OWNED BY public.samplesets.id;
+
+
+--
+-- Name: users; Type: TABLE; Schema: public; Owner: me
+--
+
+CREATE TABLE public.users (
+    id integer NOT NULL,
+    name character varying(45),
+    email character varying(45)
+);
+
+
+ALTER TABLE public.users OWNER TO me;
+
+--
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: me
+--
+
+CREATE SEQUENCE public.users_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.users_id_seq OWNER TO me;
+
+--
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: me
+--
+
+ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
+
+
+--
+-- Name: experiments id; Type: DEFAULT; Schema: public; Owner: me
+--
+
+ALTER TABLE ONLY public.experiments ALTER COLUMN id SET DEFAULT nextval('public.experiments_id_seq'::regclass);
+
+
+--
+-- Name: projects id; Type: DEFAULT; Schema: public; Owner: me
+--
+
+ALTER TABLE ONLY public.projects ALTER COLUMN id SET DEFAULT nextval('public.projects_id_seq'::regclass);
+
+
+--
+-- Name: samplesets id; Type: DEFAULT; Schema: public; Owner: me
+--
+
+ALTER TABLE ONLY public.samplesets ALTER COLUMN id SET DEFAULT nextval('public.samplesets_id_seq'::regclass);
+
+
+--
+-- Name: users id; Type: DEFAULT; Schema: public; Owner: me
+--
+
+ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_id_seq'::regclass);
+
+
+--
+-- Data for Name: experiments; Type: TABLE DATA; Schema: public; Owner: me
+--
+
+COPY public.experiments (id, owner, description) FROM stdin;
+\.
+
+
+--
+-- Data for Name: experiments_samplesets; Type: TABLE DATA; Schema: public; Owner: me
+--
+
+COPY public.experiments_samplesets (experiment_id, sampleset_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: project_members; Type: TABLE DATA; Schema: public; Owner: me
+--
+
+COPY public.project_members (user_id, project_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: projects; Type: TABLE DATA; Schema: public; Owner: me
+--
+
+COPY public.projects (id, name, leader, description) FROM stdin;
+\.
+
+
+--
+-- Data for Name: projects_experiments; Type: TABLE DATA; Schema: public; Owner: me
+--
+
+COPY public.projects_experiments (project_id, experiment_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: samplesets; Type: TABLE DATA; Schema: public; Owner: me
+--
+
+COPY public.samplesets (id, samples) FROM stdin;
+\.
+
+
+--
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: me
+--
+
+COPY public.users (id, name, email) FROM stdin;
+\.
+
+
+--
+-- Name: experiments_id_seq; Type: SEQUENCE SET; Schema: public; Owner: me
+--
+
+SELECT pg_catalog.setval('public.experiments_id_seq', 1, false);
+
+
+--
+-- Name: projects_id_seq; Type: SEQUENCE SET; Schema: public; Owner: me
+--
+
+SELECT pg_catalog.setval('public.projects_id_seq', 1, false);
+
+
+--
+-- Name: samplesets_id_seq; Type: SEQUENCE SET; Schema: public; Owner: me
+--
+
+SELECT pg_catalog.setval('public.samplesets_id_seq', 1, false);
+
+
+--
+-- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: me
+--
+
+SELECT pg_catalog.setval('public.users_id_seq', 1, false);
+
+
+--
+-- Name: experiments experiments_pkey; Type: CONSTRAINT; Schema: public; Owner: me
+--
+
+ALTER TABLE ONLY public.experiments
+    ADD CONSTRAINT experiments_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: projects projects_pkey; Type: CONSTRAINT; Schema: public; Owner: me
+--
+
+ALTER TABLE ONLY public.projects
+    ADD CONSTRAINT projects_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: samplesets samplesets_pkey; Type: CONSTRAINT; Schema: public; Owner: me
+--
+
+ALTER TABLE ONLY public.samplesets
+    ADD CONSTRAINT samplesets_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: me
+--
+
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: experiments experiments_owner_fkey; Type: FK CONSTRAINT; Schema: public; Owner: me
+--
+
+ALTER TABLE ONLY public.experiments
+    ADD CONSTRAINT experiments_owner_fkey FOREIGN KEY (owner) REFERENCES public.users(id);
+
+
+--
+-- Name: experiments_samplesets experiments_samplesets_experiment_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: me
+--
+
+ALTER TABLE ONLY public.experiments_samplesets
+    ADD CONSTRAINT experiments_samplesets_experiment_id_fkey FOREIGN KEY (experiment_id) REFERENCES public.experiments(id);
+
+
+--
+-- Name: experiments_samplesets experiments_samplesets_sampleset_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: me
+--
+
+ALTER TABLE ONLY public.experiments_samplesets
+    ADD CONSTRAINT experiments_samplesets_sampleset_id_fkey FOREIGN KEY (sampleset_id) REFERENCES public.samplesets(id);
+
+
+--
+-- Name: project_members project_members_project_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: me
+--
+
+ALTER TABLE ONLY public.project_members
+    ADD CONSTRAINT project_members_project_id_fkey FOREIGN KEY (project_id) REFERENCES public.projects(id);
+
+
+--
+-- Name: project_members project_members_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: me
+--
+
+ALTER TABLE ONLY public.project_members
+    ADD CONSTRAINT project_members_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id);
+
+
+--
+-- Name: projects_experiments projects_experiments_experiment_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: me
+--
+
+ALTER TABLE ONLY public.projects_experiments
+    ADD CONSTRAINT projects_experiments_experiment_id_fkey FOREIGN KEY (experiment_id) REFERENCES public.experiments(id);
+
+
+--
+-- Name: projects_experiments projects_experiments_project_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: me
+--
+
+ALTER TABLE ONLY public.projects_experiments
+    ADD CONSTRAINT projects_experiments_project_id_fkey FOREIGN KEY (project_id) REFERENCES public.projects(id);
+
+
+--
+-- Name: projects projects_leader_fkey; Type: FK CONSTRAINT; Schema: public; Owner: me
+--
+
+ALTER TABLE ONLY public.projects
+    ADD CONSTRAINT projects_leader_fkey FOREIGN KEY (leader) REFERENCES public.users(id);
+
+
+--
+-- PostgreSQL database dump complete
+--
+
