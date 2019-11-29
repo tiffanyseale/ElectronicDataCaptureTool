@@ -1,7 +1,7 @@
 # ElectronicDataCaptureTool
 CECS 550-050 Project Fall 2019
 
-- Installation Requirements:        
+# Installation Requirements:        
   - Database: PostgreSQL
   - Backend/Frontend Servers: Node.js    
   - **ALSO!** In order to the HTTP calls to work on the same machine, you need install Moesif Orign & CORS Changer (https://chrome.google.com/webstore/detail/moesif-orign-cors-changer/digfbfaphojjndkpccljibejjbppifbc?hl=en-US) as a chrome extension and turn it ON. ONLY TURN IT ON WHEN USING THIS THEN TURN IT BACK OFF. DO NOT FORGET TO TURN IT BACK OFF.
@@ -23,4 +23,23 @@ There is also the option to append a proxy in front of the url's inside of the h
       - Remember this, it will be important when setting up the backend server connection.
       - postgres=# CREATE ROLE whateveryouwant WITH LOGIN PASSWORD 'whateverpasswordyouwant';
       - postgres=# ALTER ROLE whateveryouwant CREATEDB;
+      - postgres=# \q;
+      - psql -d postgres -U whateveryouwant
+      - postgres=> \q;
+  - Node.js Installation:
+    - brew install node
+# EDCT INSTALLATION INSTRUCTIONS
+ - Clone this repo.
+ - Load the database:
+  - First you have to create a database inside of PostgreSQL. The database dump provided will not create it for you. Inside of the command line: 
+    - psql -d postgres -U whateveryouwant
+    - postgres=> CREATE DATABASE databaseName;
+    - Double check that this was created:
+      - postgres=> \list;
+    - postgres=> \q;
+  - Inside of the directory containing the repo:
+    - psql databaseName < dump.txt;
+  - You can find more information of PostgreSQL database dump files, and loading in databases at https://www.postgresql.org/docs/9.1/backup-dump.html
+- 
+    
     
