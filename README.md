@@ -28,7 +28,7 @@ There is also the option to append a proxy in front of the url's inside of the h
       - postgres=> \q;
   - Node.js Installation:
     - brew install node
-# EDCT INSTALLATION INSTRUCTIONS
+# EDCT SET UP INSTRUCTIONS
  - **Clone this repo.**
  - **Load the database:**
     - First you have to create a database inside of PostgreSQL. The database dump provided will not create it for you. Inside of the command line: 
@@ -47,5 +47,15 @@ There is also the option to append a proxy in front of the url's inside of the h
       - node index.js
 - **Start the frontend server (ElectronicDataCaptureTool/edct/):**
     - (See the same information inside of the README, inside of ElectronicDataCaptureTool/edct/)
+    - Build Setup
+      - install dependencies
+        - npm install
+      - serve with hot reload at localhost:8080
+        - npm run dev
+      - For detailed explanation on how things work, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).
+- **Open application to verify set up:**
+    - Open Chrome, naviagate to http://localhost:8080
+    
+# USER MANUAL
     
       
