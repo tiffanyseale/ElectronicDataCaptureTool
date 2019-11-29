@@ -1,3 +1,4 @@
+# This is the backend server for the EDCT
 brew install postgresql
 brew services start postgresql
 // create a user with role to createDB and create database with backup file
