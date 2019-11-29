@@ -29,17 +29,23 @@ There is also the option to append a proxy in front of the url's inside of the h
   - Node.js Installation:
     - brew install node
 # EDCT INSTALLATION INSTRUCTIONS
- - Clone this repo.
- - Load the database:
-  - First you have to create a database inside of PostgreSQL. The database dump provided will not create it for you. Inside of the command line: 
-    - psql -d postgres -U whateveryouwant
-    - postgres=> CREATE DATABASE databaseName;
-    - Double check that this was created:
-      - postgres=> \list;
-    - postgres=> \q;
-  - Inside of the directory containing the repo:
-    - psql databaseName < dump.txt;
-  - You can find more information of PostgreSQL database dump files, and loading in databases at https://www.postgresql.org/docs/9.1/backup-dump.html
-- 
+ - **Clone this repo.**
+ - **Load the database:**
+    - First you have to create a database inside of PostgreSQL. The database dump provided will not create it for you. Inside of the command line: 
+      - psql -d postgres -U whateveryouwant
+      - postgres=> CREATE DATABASE databaseName;
+      - Double check that this was created:
+        - postgres=> \list;
+      - postgres=> \q;
+    - Inside of the directory containing the repo:
+      - psql databaseName < dump.txt;
+    - You can find more information of PostgreSQL database dump files, and loading in databases at https://www.postgresql.org/docs/9.1/backup-dump.html
+- **Start the backend server (ElectronicDataCaptureTool/edct-server/):**
+    - Inside of edct-server install Express and node-postgres (https://expressjs.com/, https://node-postgres.com/):
+      - npm i express pg
+    - Inside of edct-server start the server:
+      - node index.js
+- **Start the frontend server (ElectronicDataCaptureTool/edct/):**
+    - (See the same information inside of the README, inside of ElectronicDataCaptureTool/edct/)
     
-    
+      
