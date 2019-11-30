@@ -1,30 +1,8 @@
 <template>
     <div align = center>
-        <section align = "center">
-            <h1>Welcome to the Electronic Data Capture Tool!</h1>
-            <button class="button" @click="logIn">Log in</button>
-            <button class="button" @click="newUser">Create account</button>
-    </section>
+        Log In Page!
 </div>
 </template>
-
-<script>
-export default {
-  data () {
-    return {
-    }
-  },
-  methods: {
-    logIn () {
-      // this.$store.commit('logIn');
-      this.$router.push({path: '/LogIn'})
-    },
-    newUser () {
-      this.$router.push({path: '/NewUser'})
-    }
-  }
-}
-</script>
 
 <style scoped>
     .section {

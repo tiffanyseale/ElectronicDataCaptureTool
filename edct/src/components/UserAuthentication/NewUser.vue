@@ -1,26 +1,30 @@
 <template>
     <div align = center>
-        <section align = "center">
-            <h1>Welcome to the Electronic Data Capture Tool!</h1>
-            <button class="button" @click="logIn">Log in</button>
-            <button class="button" @click="newUser">Create account</button>
-    </section>
+        <h1>Welcome to the Electronic Data Capture Tool</h1>
+        <h2>Please create an account!</h2>
+        <br>
+        Enter your name: 
+        <br>
+        <input type="text" id="name" v-model="name">
+        <br>
+        Enter your email:
+        <br>
+        <input type="text" id="email" v-model="email">
+        <br>
+        <button v-if="email != ''" class="button" @click="createNewUser">Submit</button>
 </div>
 </template>
-
 <script>
 export default {
   data () {
     return {
+        email: '',
+        name: ''
     }
   },
   methods: {
-    logIn () {
-      // this.$store.commit('logIn');
+    createNewUser () {
       this.$router.push({path: '/LogIn'})
-    },
-    newUser () {
-      this.$router.push({path: '/NewUser'})
     }
   }
 }
@@ -45,5 +49,11 @@ export default {
         font-size: 16px;
         margin: 4px 2px;
         cursor: pointer;
+    }
+    input[type=text] {
+        width: 75%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        box-sizing: border-box;
     }
 </style>

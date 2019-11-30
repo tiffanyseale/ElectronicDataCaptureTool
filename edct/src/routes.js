@@ -1,7 +1,10 @@
 import Home from './components/Home.vue';
-import UserAuth from './components/UserAuth.vue';
+import LogIn from './components/UserAuthentication/LogIn.vue';
+import NewUser from './components/UserAuthentication/NewUser.vue';
 
 export const routes = [
     { path: '/', component : Home},
-    { path: '/UserAuth', component: UserAuth}
+    { path: '/LogIn', component: LogIn},
+    { path: '/NewUser', component: NewUser}
+
 ];
