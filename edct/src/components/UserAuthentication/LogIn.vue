@@ -3,7 +3,7 @@
         <h1>Electronic Data Capture Tool</h1>
         <h2> Welcome back! </h2>
         <br>
-        Enter your email:
+            Enter your email:
         <br>
         <input type="text" id="email" v-model="email">
         <br>
@@ -20,15 +20,19 @@ export default {
   methods: {
     logIn () {
         this.$http.get('http://localhost:4000/users/'+ this.email)
-                            .then(response => {
-                                try {
-                                console.log(response.body[0].id);
-                                }
-                                catch(error) {
-                                console.log('That user does not exist!');
-                                }
-                            }, error => { console.log(error); });
-      this.$store.commit('logIn');
+            .then(response => {
+                    if (response.body.length > 0)
+                    {
+                            this.$store.commit('setUserID', response.body[0].id);
+                            this.$store.commit('logIn');
+                            this.$router.push({path: '/Projects'});
+                    }
+                    else
+                    {
+                        this.$store.commit('setUserID', 0);
+                        alert('That user is not registered!');
+                    }
+            }, error => {  alert('There was a network error!'); });
     }
   }
 }

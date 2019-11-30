@@ -28,9 +28,8 @@ export default {
     createNewUser () {
         this.$http.post('http://localhost:4000/users/', this.user)
                 .then(response => {
-                    console.log(response);
+                    this.$router.push({path: '/LogIn'})
                 }, error => { console.log(error); });
-        this.$router.push({path: '/LogIn'})
     }
   }
 }

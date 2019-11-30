@@ -6,7 +6,8 @@ Vue.use(Vuex);
 export const store = new Vuex.Store ({
   state:
   {
-    loggedIn: false
+    loggedIn: false,
+    userID: 0
   },
   getters: {
     isLoggedIn: state => {
@@ -16,6 +17,9 @@ export const store = new Vuex.Store ({
   mutations: {
     logIn (state) {
       state.loggedIn = !state.loggedIn;
+    },
+    setUserID (state, userID) {
+      state.userID = userID;
     }
   }
 });
