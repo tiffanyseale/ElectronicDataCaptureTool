@@ -1,8 +1,38 @@
 <template>
     <div align = center>
-        Log In Page!
+        <h1>Electronic Data Capture Tool</h1>
+        <h2> Welcome back! </h2>
+        <br>
+        Enter your email:
+        <br>
+        <input type="text" id="email" v-model="email">
+        <br>
+        <button v-if="email != ''" class="button" @click="logIn">Log in</button>
 </div>
 </template>
+<script>
+export default {
+  data () {
+    return {
+        email: ''
+    }
+  },
+  methods: {
+    logIn () {
+        this.$http.get('http://localhost:4000/users/'+ this.email)
+                            .then(response => {
+                                try {
+                                console.log(response.body[0].id);
+                                }
+                                catch(error) {
+                                console.log('That user does not exist!');
+                                }
+                            }, error => { console.log(error); });
+      this.$store.commit('logIn');
+    }
+  }
+}
+</script>
 
 <style scoped>
     .section {
@@ -23,5 +53,11 @@
         font-size: 16px;
         margin: 4px 2px;
         cursor: pointer;
+    }
+    input[type=text] {
+        width: 75%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        box-sizing: border-box;
     }
 </style>

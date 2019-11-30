@@ -5,11 +5,11 @@
         <br>
         Enter your name: 
         <br>
-        <input type="text" id="name" v-model="name">
+        <input type="text" id="name" v-model="user.name">
         <br>
         Enter your email:
         <br>
-        <input type="text" id="email" v-model="email">
+        <input type="text" id="email" v-model="user.email">
         <br>
         <button v-if="email != ''" class="button" @click="createNewUser">Submit</button>
 </div>
@@ -18,13 +18,19 @@
 export default {
   data () {
     return {
-        email: '',
-        name: ''
+        user: {
+            name: '',
+            email: ''
+        }
     }
   },
   methods: {
     createNewUser () {
-      this.$router.push({path: '/LogIn'})
+        this.$http.post('http://localhost:4000/users/', this.user)
+                .then(response => {
+                    console.log(response);
+                }, error => { console.log(error); });
+        this.$router.push({path: '/LogIn'})
     }
   }
 }
