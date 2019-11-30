@@ -9,6 +9,9 @@ const userTable = require('./user_org_info/userQueries')
 const projectTable = require('./projects/projectQueries')
 const projectMembers = require('./projects/projectMembers')
 const experimentsTable = require('./experiments/experimentQueries')
+const projectsExperiments = require('./experiments/projectsExperiments')
+const samplesSetsTable = require('./samplesets/sampleSetQueries')
+const experimentsSampleSets = require('./samplesets/experimentsSampleSets')
 
 const port = 4000
 
@@ -35,23 +38,36 @@ app.put('/users/:id', userTable.updateUser)
 
 // All of these work with the backend
 // CRUD on projects
-app.get('/projects', projectTable.getProjects)
 app.get('/projects/:id', projectTable.getProjectsByID)
-app.post('/projects', projectTable.createProject)
+app.post('/projects/', projectTable.createProject)
 app.put('/projects/:id', projectTable.updateProject)
 app.delete('/projects/:id', projectTable.deleteProject)
 
-// This shouldn't need to be adjusted when changing the database layer
-// Add additional users to the project_members table
+// CR on project_members
 app.get('/projectMembers/:id', projectMembers.getProjectsByUserID)
 app.post('/projectMembers/', projectMembers.addUserToProject)
 
-// CRUD on experiments
-app.get('/experiments:id', experimentsTable.getExperiment)
-app.get('/experiments:project', experimentsTable.getExperimentsByProject)
+// CRU on experiments
+app.get('/experiments/:id', experimentsTable.getExperiment)
 app.post('/experiments', experimentsTable.createExperiment)
 app.put('/experiments/:id', experimentsTable.updateExperiment)
 
+// CRD on projects_experiments
+app.get('/projectexperiments/:id', projectsExperiments.getExperimentsByProject)
+app.post('/projectexperiments/', projectsExperiments.addExperimentToProject)
+app.delete('/projectexperiments/', projectsExperiments.deleteExperimentFromProject)
+
+// CR on samplesets
+app.get('/experimentsamplesets/:id', samplesSetsTable.getSampleSet)
+app.post('/experimentsamplesets/', samplesSetsTable.createSampleSet)
+
+// CRD on experiments_samplesets
+app.get('/experimentssamplesets/:experiment', experimentsSampleSets.getSampleSetsByExperiment)
+app.post('/experimentssamplesets/', experimentsSampleSets.addSampleSetToExperiment)
+app.delete('/experimentssamplesets/', experimentsSampleSets.deleteSampleSetFromExperiment)
+
 app.listen(port, () => {
-  console.log(`edct-server running on port ${port}.`)
+  console.log(`edct-server running on port ${port}.`);
+  console.log(`You should be good to connect the front end sever.`);
+  console.log(`If you want to change this port number, see line 13 of index.js`);
 })

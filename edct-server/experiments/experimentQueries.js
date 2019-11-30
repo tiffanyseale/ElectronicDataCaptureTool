@@ -18,17 +18,6 @@ const getExperiment = (request, response) => {
     })
 }
 
-const getExperimentsByProject = (request, response) => {
-  const { project_id } = request.body
-
-  pool.query('SELECT experiment_id FROM projects_experiments WHERE project_id = $1', [project_id], (error, results) => {
-    if (error) {
-      throw error
-    }
-    response.status(201).send(`Experiment id's retrieved successfully`)
-    })
-}
-
 // This should be working as well
 const createExperiment = (request, response) => {
   const { owner, project, description } = request.body
@@ -67,7 +56,6 @@ const updateExperiment = (request, response) => {
 
 module.exports = {
   getExperiment,
-  getExperimentsByProject,
   createExperiment,
   updateExperiment
 }

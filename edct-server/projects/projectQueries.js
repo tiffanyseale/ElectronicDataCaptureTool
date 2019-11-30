@@ -6,15 +6,6 @@ const pool = new Pool({
   password: 'password',
   port: 5432,
 })
-// this works
-const getProjects = (request, response) => {
-  pool.query('SELECT * FROM projects',(error, results) => {
-    if (error) {
-      throw error
-    }
-    response.status(200).json(results.rows)
-  })
-}
 
 // this also works
 const getProjectsByID = (request, response) => {
@@ -89,9 +80,8 @@ const deleteProject = (request, response) => {
 }
 
 module.exports = {
-  getProjects,
   getProjectsByID,
   createProject,
   updateProject,
-  deleteProject,
+  deleteProject
 }
