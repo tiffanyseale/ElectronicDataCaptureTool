@@ -1,10 +1,5 @@
 <template>
     <div align = center>
-        <section align = "center">
-            <h1>Welcome to the Electronic Data Capture Tool!</h1>
-            <button class="button">Log in</button>
-            <button class="button">Create account</button>
-    </section>
 </div>
 </template>
 

@@ -6,11 +6,11 @@
 
 <script>
 import { store } from "./store.js";
+import { routes } from './routes';
 export default {
   name: 'app',
   data () {
     return {
-      loggedIn: store.state.loggedIn
     }
   }
 }
