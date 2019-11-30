@@ -60,7 +60,7 @@ There is also the option to append a proxy in front of the url's inside of the h
 https://github.com/tiffanyseale/ElectronicDataCaptureTool/wiki/User-Manual
 
 # Tiffany's Developer Notebook
-https://github.com/tiffanyseale/ElectronicDataCaptureTool/wiki/User-Manual
+https://github.com/tiffanyseale/ElectronicDataCaptureTool/wiki/Tiff's-Dev-Notebook
 
     
       
