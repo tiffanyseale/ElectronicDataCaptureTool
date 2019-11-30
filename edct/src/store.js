@@ -7,7 +7,15 @@ export const store = new Vuex.Store ({
   state:
   {
     loggedIn: false,
-    userID: 0
+    userID: 0,
+    projectIDs: [],
+    projects: [],
+    projectID: 0,
+    experimentIDs: [],
+    experimentID: 0,
+    sampleSetIDs: [],
+    sampleSet: 0
+
   },
   getters: {
     isLoggedIn: state => {
@@ -20,6 +28,9 @@ export const store = new Vuex.Store ({
     },
     setUserID (state, userID) {
       state.userID = userID;
+    },
+    setProjectIDs (state, projectID) {
+      state.projectIDs.push(projectID);
     }
   }
 });
