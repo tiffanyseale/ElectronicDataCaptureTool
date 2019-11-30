@@ -1,8 +1,8 @@
 {
   "name": "edct",
-  "description": "electronic data capture tool",
+  "description": "A CECS 550 project",
   "version": "1.0.0",
-  "author": "tiffany seale",
+  "author": "tlseal01@louisville.edu",
   "license": "MIT",
   "private": true,
   "scripts": {
@@ -10,11 +10,9 @@
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "dependencies": {
-    "convert-csv-to-json": "0.0.15",
-    "express": "^4.17.1",
-    "pg": "^7.14.0",
     "vue": "^2.5.11",
-    "vue-resource": "^1.5.1"
+    "vue-lazy-background-images": "^1.0.0",
+    "vue-router": "^3.1.3"
   },
   "browserslist": [
     "> 1%",
@@ -31,7 +29,7 @@
     "file-loader": "^1.1.4",
     "vue-loader": "^13.0.5",
     "vue-template-compiler": "^2.4.4",
-    "webpack": "^3.12.0",
+    "webpack": "^3.6.0",
     "webpack-dev-server": "^2.9.1"
   }
 }

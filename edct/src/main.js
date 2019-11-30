@@ -1,14 +1,17 @@
 import Vue from 'vue'
-import VueResource from 'vue-resource'
+import VueRouter from 'vue-router'
 import App from './App.vue'
-import Home from './Home.vue'
-import NavBar from '../components/NavBar.vue'
+import { routes } from './routes';
 
-Vue.use(VueResource);
-Vue.component('home-page', Home);
-Vue.component('nav-bar', NavBar);
+Vue.use(VueRouter);
+
+const router = new VueRouter({
+  mode: 'history',
+  routes
+});
 
 new Vue({
   el: '#app',
+  router,
   render: h => h(App)
 })

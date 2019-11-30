@@ -1,13 +1,23 @@
 <template>
-  <div>
-    <nav-bar></nav-bar>
-    <home-page></home-page>
-    <footer>EDCT: University of Louisville CECS 550 Fall 2019</footer>
-  </div>
+<div class ="container">
+  <router-view></router-view>
+</div>
 </template>
 
 <script>
+import { store } from "./store.js";
+export default {
+  name: 'app',
+  data () {
+    return {
+      loggedIn: store.state.loggedIn
+    }
+  }
+}
 </script>
 
 <style>
+/* body {
+  background-image: url('./assets/background_photo.jpg');
+} */
 </style>
