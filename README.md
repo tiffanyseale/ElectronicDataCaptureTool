@@ -57,5 +57,10 @@ There is also the option to append a proxy in front of the url's inside of the h
     - Open Chrome, naviagate to http://localhost:8080
     
 # USER MANUAL
+https://github.com/tiffanyseale/ElectronicDataCaptureTool/wiki/User-Manual
+
+# Tiffany's Developer Notebook
+https://github.com/tiffanyseale/ElectronicDataCaptureTool/wiki/User-Manual
+
     
       
