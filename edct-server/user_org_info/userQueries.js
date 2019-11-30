@@ -2,10 +2,12 @@ const Pool = require('pg').Pool
 const pool = new Pool({
   user: 'me',
   host: 'localhost',
-  database: 'edctapi',
+  database: 'edct',
   password: 'password',
   port: 5432,
 })
+// This is updated for the current database.
+// this works
 const getUsers = (request, response) => {
   pool.query('SELECT * FROM users ORDER BY id ASC', (error, results) => {
     if (error) {
@@ -15,8 +17,9 @@ const getUsers = (request, response) => {
   })
 }
 
+// this works
 const getUserByEmail = (request, response) => {
-  const email = parseInt(request.params.email)
+  const email = request.params.email;
 
   pool.query('SELECT * FROM users WHERE email = $1', [email], (error, results) => {
     if (error) {
@@ -27,9 +30,9 @@ const getUserByEmail = (request, response) => {
 }
 
 const createUser = (request, response) => {
-  const { name, email, password } = request.body
+  const { name, email} = request.body
 
-  pool.query('INSERT INTO users (name, email, password) VALUES ($1, $2, $3)', [name, email, password], (error, results) => {
+  pool.query('INSERT INTO users (name, email) VALUES ($1, $2)', [name, email], (error, results) => {
     if (error) {
       throw error
     }

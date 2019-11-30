@@ -2,13 +2,13 @@ const Pool = require('pg').Pool
 const pool = new Pool({
   user: 'me',
   host: 'localhost',
-  database: 'edctapi',
+  database: 'edct',
   password: 'password',
   port: 5432,
 })
-
+// this works
 const getProjects = (request, response) => {
-  pool.query('SELECT * FROM project_members',(error, results) => {
+  pool.query('SELECT * FROM projects',(error, results) => {
     if (error) {
       throw error
     }
@@ -16,6 +16,7 @@ const getProjects = (request, response) => {
   })
 }
 
+// this also works
 const getProjectsByID = (request, response) => {
   const id = parseInt(request.params.id)
   pool.query('SELECT * FROM projects WHERE id = $1',[id],(error, results) => {
@@ -42,6 +43,7 @@ const createProject = (request, response) => {
     })
 }
 
+// This also works
 const updateProject = (request, response) => {
   const id = parseInt(request.params.id)
   const { name, description } = request.body
@@ -58,12 +60,13 @@ const updateProject = (request, response) => {
   )
 }
 
-// This is HARD DELETE. Meaning that when you delete the project
-//  you also delete all of the associated experiments
+// This is SOFT DELETE. Meaning that when you delete the project
+// you also delete all of the associated experiments id's in the
+// project_experiment table, but not the actual experiments or datasets
 const deleteProject = (request, response) => {
   const id = parseInt(request.params.id)
 
-  pool.query('DELETE FROM experiments WHERE project = $3', [id], (error, results) => {
+  pool.query('DELETE FROM project_experiments WHERE project = $3', [id], (error, results) => {
     if (error) {
       throw error
     }

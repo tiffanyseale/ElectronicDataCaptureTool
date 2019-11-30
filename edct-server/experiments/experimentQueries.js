@@ -2,7 +2,7 @@ const Pool = require('pg').Pool
 const pool = new Pool({
   user: 'me',
   host: 'localhost',
-  database: 'edctapi',
+  database: 'edct',
   password: 'password',
   port: 5432,
 })
@@ -21,7 +21,7 @@ const getExperiment = (request, response) => {
 const getExperimentsByProject = (request, response) => {
   const { project_id } = request.body
 
-  pool.query('SELECT id FROM experiments WHERE project = $1', [project_id], (error, results) => {
+  pool.query('SELECT experiment_id FROM projects_experiments WHERE project_id = $1', [project_id], (error, results) => {
     if (error) {
       throw error
     }
@@ -29,29 +29,45 @@ const getExperimentsByProject = (request, response) => {
     })
 }
 
+// This should be working as well
 const createExperiment = (request, response) => {
-  const { owner, project, propertiespath, datasetpath } = request.body
+  const { owner, project, description } = request.body
+  // you will need this for expeirments
   // properties and dataset should be paths to their .csv files
   // using csvtojson from npm, https://www.npmjs.com/package/csvtojson
-  const csv = require('csvtojson')
-  const properties= csv().fromFile(propertiespath);
-  const dataset = csv().fromFile(datasetpath);
-  pool.query('INSERT INTO experiments (owner, project, properties, dataset) VALUES ($1, $2, $3, $4)', [owner, project, properties, dataset], (error, results) => {
+  // const csv = require('csvtojson')
+  // const properties= csv().fromFile(propertiespath);
+  // const dataset = csv().fromFile(datasetpath);
+  pool.query('INSERT INTO experiments (owner, description) VALUES ($1, $2)', [owner, description], (error, results) => {
     if (error) {
       throw error
     }
-    pool.query('INSERT INTO proj_exp (project_id, experiment_id) VALUES ($1, $2)', [project, results.insertId], (error, results) => {
+    pool.query('INSERT INTO projects_experiments (project_id, experiment_id) VALUES ($1, $2)', [project, results.insertId], (error, results) => {
       if (error) {
         throw error
       }
       response.status(201).send(`Experiment added with ID: ${results.insertId}`)
     })
   })
+}
 
+// This is working
+const updateExperiment = (request, response) => {
+  const experiment_id = parseInt(request.params.id)
+  const { owner, description } = request.body
+
+  pool.query('UPDATE experiments SET owner = $1, description = $2 WHERE id = $3',
+  [owner, description, experiment_id], (error, results) => {
+    if (error) {
+      throw error
+    }
+    response.status(201).send(`Experiment information updated successfully`)
+    })
 }
 
 module.exports = {
   getExperiment,
   getExperimentsByProject,
-  createExperiment
+  createExperiment,
+  updateExperiment
 }
