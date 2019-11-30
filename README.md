@@ -1,5 +1,6 @@
 # ElectronicDataCaptureTool
-CECS 550-050 Project Fall 2019
+CECS 550-050 Project Fall 2019      
+Ryan Schron, Tiffany Seale
 
 # Installation Requirements:        
   - Database: PostgreSQL
