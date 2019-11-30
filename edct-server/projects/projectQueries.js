@@ -20,16 +20,15 @@ const getProjectsByID = (request, response) => {
 
 const createProject = (request, response) => {
   const { name, leader, description } = request.body
-
   pool.query('INSERT INTO projects (name, leader, description) VALUES ($1, $2, $3)', [name, leader, description], (error, results) => {
     if (error) {
       throw error
     }
-    pool.query('INSERT INTO project_members (user_id, project_id) VALUES ($1, $2)', [leader, results.insertId], (error, results) => {
+    pool.query('INSERT INTO project_members (user_id, project_id) VALUES ($1, (SELECT max(id) FROM projects))', [leader], (error, results) => {
         if (error) {
           throw error
         }
-        response.status(201).send(`Join table successful`)
+        response.status(201).send(`${results.status}`)
         })
     })
 }
