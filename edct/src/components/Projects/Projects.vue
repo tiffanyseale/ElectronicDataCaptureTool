@@ -11,15 +11,20 @@
 <table id="firstTable" v-if="viewProjects">
   <thead>
     <tr>
-      <th>ID</th>
+      <th>Name</th>
+      <th>Description</th>
     </tr>
   </thead>
   <tbody>
     <tr v-for="project in projects" v-bind:key="project.id">
-      <td>{{project}}</td>
+      <td>{{project.name}}</td>
+      <td>{{project.description}}</td>
     </tr>
   </tbody>
 </table>
+<br>
+<button class="button" @click="chooseProject">Go to Experiments</button>
+<br>
 </div>
 </template>
 <script>
@@ -58,6 +63,9 @@ export default {
     },
     addProjects () {
         this.$router.push({path: '/Projects/AddProject'});
+    },
+    chooseProject () {
+      this.$router.push({path: '/Experiments'});
     }
   }
 }
