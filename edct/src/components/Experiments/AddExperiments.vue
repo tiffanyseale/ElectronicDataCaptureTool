@@ -1,37 +1,31 @@
 <template>
     <div align = center>
         <h1>Electronic Data Capture Tool</h1>
-        <h2> Welcome back! </h2>
+        <h2> Please add the experiment! </h2>
+        <h3> Keep in mind: you are the owner of any experiment you create </h3>
         <br>
-            Enter your email:
+            Enter a description of the experiment:
+        <input type="text" id="experiment_description" v-model="experiment.description">
         <br>
-        <input type="text" id="email" v-model="email">
-        <br>
-        <button v-if="email != ''" class="button" @click="logIn">Log in</button>
+        <button v-if="experiment.description != ''" class="button" @click="createExperiment">Create Experiment</button>
 </div>
 </template>
 <script>
 export default {
   data () {
     return {
-        email: ''
+        experiment: {
+            owner: $store.state.userID,
+            project: $store.state.chosenProject.id,
+            description: ''
+        }
     }
   },
   methods: {
-    logIn () {
-        this.$http.get('http://localhost:4000/users/'+ this.email)
+    createExperiment () {
+        this.$http.post('http://localhost:4000/experiments/', this.experiment)
             .then(response => {
-                    if (response.body.length > 0)
-                    {
-                            this.$store.commit('setUser', response.body[0].id, response.body[0].name);
-                            this.$store.commit('logIn');
-                            this.$router.push({path: '/Projects'});
-                    }
-                    else
-                    {
-                        this.$store.commit('setUserID', 0);
-                        alert('That user is not registered!');
-                    }
+                    this.$router.push({path: '/Experiments'});
             }, error => {  alert('There was a network error!'); });
     }
   }

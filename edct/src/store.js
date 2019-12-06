@@ -8,14 +8,14 @@ export const store = new Vuex.Store ({
   {
     loggedIn: false,
     userID: 0,
+    userName: '',
     projectIDs: [],
     projects: [],
-    projectID: 0,
+    chosenProject: {},
     experimentIDs: [],
-    experimentID: 0,
-    sampleSetIDs: [],
-    sampleSet: 0
-
+    experiments: [],
+    chosenExperiment: {},
+    sampleSetIDs: []
   },
   getters: {
     isLoggedIn: state => {
@@ -26,11 +26,21 @@ export const store = new Vuex.Store ({
     logIn (state) {
       state.loggedIn = !state.loggedIn;
     },
-    setUserID (state, userID) {
+    setUser (state, userID, userName) {
       state.userID = userID;
+      state.userName = userName;
     },
     setProjectIDs (state, projectID) {
       state.projectIDs.push(projectID);
+    },
+    setProjectID (state, project) {
+      state.chosenProject = project;
+    },
+    setExperimentIDs (state, experimentID) {
+      state.experimentIDs.push(experimentID);
+    },
+    setExperimentID (state, experiment) {
+      state.chosenExperiment = experiment;
     }
   }
 });

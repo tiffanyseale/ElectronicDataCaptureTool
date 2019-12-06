@@ -29,7 +29,6 @@ export default {
   },
   methods: {
     createProject () {
-        console.log(this.project);
         this.$http.post('http://localhost:4000/projects/', this.project)
             .then(response => {
                     this.$router.push({path: '/Projects'});
