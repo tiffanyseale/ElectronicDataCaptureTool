@@ -229,6 +229,9 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 --
 
 COPY public.experiments (id, owner, description) FROM stdin;
+1	1	test experiment
+2	1	test experiment 2
+3	1	1234567
 \.
 
 
@@ -237,6 +240,7 @@ COPY public.experiments (id, owner, description) FROM stdin;
 --
 
 COPY public.experiments_samplesets (experiment_id, sampleset_id) FROM stdin;
+1	1
 \.
 
 
@@ -245,6 +249,8 @@ COPY public.experiments_samplesets (experiment_id, sampleset_id) FROM stdin;
 --
 
 COPY public.project_members (user_id, project_id) FROM stdin;
+1	32
+1	33
 \.
 
 
@@ -253,6 +259,8 @@ COPY public.project_members (user_id, project_id) FROM stdin;
 --
 
 COPY public.projects (id, name, leader, description) FROM stdin;
+32	test project	1	test description of a project
+33	name of project	1	description
 \.
 
 
@@ -261,6 +269,9 @@ COPY public.projects (id, name, leader, description) FROM stdin;
 --
 
 COPY public.projects_experiments (project_id, experiment_id) FROM stdin;
+32	1
+32	2
+32	\N
 \.
 
 
@@ -269,6 +280,7 @@ COPY public.projects_experiments (project_id, experiment_id) FROM stdin;
 --
 
 COPY public.samplesets (id, samples) FROM stdin;
+1	{"data1": "test data 1", "items": {"qty": 24, "data 1": "test data 2"}}
 \.
 
 
@@ -277,6 +289,11 @@ COPY public.samplesets (id, samples) FROM stdin;
 --
 
 COPY public.users (id, name, email) FROM stdin;
+1	test	test@email.com
+2	test2	test2@email.com
+3	test3	test3@email.com
+4	test_user	test_user@email.com
+5	name	email
 \.
 
 
@@ -284,28 +301,28 @@ COPY public.users (id, name, email) FROM stdin;
 -- Name: experiments_id_seq; Type: SEQUENCE SET; Schema: public; Owner: me
 --
 
-SELECT pg_catalog.setval('public.experiments_id_seq', 1, false);
+SELECT pg_catalog.setval('public.experiments_id_seq', 3, true);
 
 
 --
 -- Name: projects_id_seq; Type: SEQUENCE SET; Schema: public; Owner: me
 --
 
-SELECT pg_catalog.setval('public.projects_id_seq', 1, false);
+SELECT pg_catalog.setval('public.projects_id_seq', 33, true);
 
 
 --
 -- Name: samplesets_id_seq; Type: SEQUENCE SET; Schema: public; Owner: me
 --
 
-SELECT pg_catalog.setval('public.samplesets_id_seq', 1, false);
+SELECT pg_catalog.setval('public.samplesets_id_seq', 1, true);
 
 
 --
 -- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: me
 --
 
-SELECT pg_catalog.setval('public.users_id_seq', 1, false);
+SELECT pg_catalog.setval('public.users_id_seq', 5, true);
 
 
 --
