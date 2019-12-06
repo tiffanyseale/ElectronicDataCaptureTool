@@ -8,13 +8,13 @@ const pool = new Pool({
 })
 
 const getExperimentsByProject = (request, response) => {
-  const { project_id } = request.body
-
-  pool.query('SELECT experiment_id FROM projects_experiments WHERE project_id = $1', [project_id], (error, results) => {
+  const id = parseInt(request.params.id);
+  pool.query('SELECT experiment_id FROM projects_experiments WHERE project_id = $1', [id], (error, results) => {
+    //pool.query('SELECT experiment_id FROM projects_experiments WHERE project_id = 32', (error, results) => {
     if (error) {
       throw error
     }
-    response.status(201).send(`Experiment id's retrieved successfully`)
+    response.status(201).send(results.rows)
     })
 }
 

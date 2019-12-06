@@ -7,15 +7,13 @@ const pool = new Pool({
   port: 5432,
 })
 
-// Need to move this to experimentSampleSets
 const getSampleSetsByExperiment = (request, response) => {
-  const { experiment_id } = request.body
-
-  pool.query('SELECT sampleset_id FROM experiments_samplesets WHERE experiment_id = $1', [experiment_id], (error, results) => {
+  const id = parseInt(request.params.id);
+  pool.query('SELECT * FROM experiments_samplesets WHERE experiment_id = $1', [id], (error, results) => {
     if (error) {
       throw error
     }
-    response.status(201).send(`Sampleset id's retrieved successfully`)
+    response.status(201).send(results.rows)
     })
 }
 

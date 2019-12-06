@@ -58,11 +58,11 @@ app.post('/projectexperiments/', projectsExperiments.addExperimentToProject)
 app.delete('/projectexperiments/', projectsExperiments.deleteExperimentFromProject)
 
 // CR on samplesets
-app.get('/experimentsamplesets/:id', samplesSetsTable.getSampleSet)
-app.post('/experimentsamplesets/', samplesSetsTable.createSampleSet)
+app.get('/samplesets/:id', samplesSetsTable.getSampleSet)
+app.post('/samplesets/', samplesSetsTable.createSampleSet)
 
 // CRD on experiments_samplesets
-app.get('/experimentssamplesets/:experiment', experimentsSampleSets.getSampleSetsByExperiment)
+app.get('/experimentssamplesets/:id', experimentsSampleSets.getSampleSetsByExperiment)
 app.post('/experimentssamplesets/', experimentsSampleSets.addSampleSetToExperiment)
 app.delete('/experimentssamplesets/', experimentsSampleSets.deleteSampleSetFromExperiment)
 
